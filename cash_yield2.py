@@ -2,9 +2,11 @@ import yfinance as yf
 from datetime import datetime, timedelta
 
 acao = str(input("Digite o Ticker da empresa: "))
-acao.upper()
+acao = acao.upper()
 
 ativo = yf.Ticker(acao+".SA")
+# acao = "CAML3"
+# ativo= yf.Ticker("CAML3.SA")
 dolar = yf.Ticker("USDBRL=X")
 dividend_info = ativo.dividends
 
@@ -22,6 +24,10 @@ count = -1
 cotacao_ativo = round(ativo.history(period='1d')['Close'].iloc[0], 2)
 cotacao_dolar = round(dolar.history(period='1d')['Close'].iloc[0], 3)
 
+print('------------------')
+print(f'| Ticker: {acao} |')
+print('------------------')
+
 for i in filtered_dividends:
     dividend_real = round(dividend_info.iloc[count], 4)
     data = dividend_info.index[count]
@@ -30,12 +36,13 @@ for i in filtered_dividends:
     dividend_dolar = round(dividend_real/cotacao_data_dividendo, 4)
     dividend_dolar_total = round(dividend_dolar_total+dividend_dolar, 4)
     print(f'Cotação dolar na data do dividendo: ${cotacao_data_dividendo}')
-    print(f'Dividendo em dolar: $ {dividend_dolar}')
-    print(f'Dividendo em reais: R$ {dividend_real}')
+    print(f'Dividendo em REAIS: R$ {dividend_real}')
+    print(f'Dividendo em DOLAR: $ {dividend_dolar}')
     print(f'Data do dividendo: {data_organizada}')
     print("----------------------------------------")
     count = count-1
-preco_teto_dolar = round((dividend_dolar_total*cotacao_dolar)*16.667, 2)
+#MARGEM DE SEGURANÇA
+preco_teto_dolar = round((dividend_dolar_total*16.667)*cotacao_dolar, 2)
 
-print(f'Total dividendos em dolar: $ {dividend_dolar_total}')
-print(f'Preço teto em dolar: R$ {preco_teto_dolar}')
+print(f'Total dividendos em DOLAR: $ {dividend_dolar_total}')
+print(f'Preço teto em DOLAR: R$ {preco_teto_dolar}')

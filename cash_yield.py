@@ -37,8 +37,8 @@ for i in filtered_dividends:
     count = count -1
 
 preco_teto = round(total*16.6, 3)
-
 yield_total = round((total/preco)*100, 3)
+margem = round(((preco_teto-preco)/preco_teto)*100, 2)
 print('------------------------------------------------------------------------')
 print(f'| Dividendos totais nos ultimos 12 meses: R$ {total}, Yield: {yield_total} % |')
 print('------------------------------------------------------------------------')
@@ -48,4 +48,6 @@ print('------------------------')
 print('------------------------')
 print(f'| Preco atual: R$ {preco} |')
 print('------------------------')
-
+print('-----------------------------------')
+print(f'| Margem de segurança: {margem} % |')
+print('-----------------------------------')
