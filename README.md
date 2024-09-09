@@ -1,2 +1,2 @@
 # PrecoTetoBazin
- Preco této método Décio Bazin
+ Preço teto método Décio Bazin
